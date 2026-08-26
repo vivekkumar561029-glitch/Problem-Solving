@@ -1,25 +1,23 @@
 class Solution {
 public:
     string countAndSay(int n) {
-        string result = "1";
-
-        for (int i = 2; i <= n; i++) {
-            string current = "";
-            int count = 1;
-
-            for (int j = 0; j < result.size(); j++) {
-                if (j + 1 < result.size() && result[j] == result[j + 1]) {
-                    count++;
-                } else {
-                    current += to_string(count);
-                    current += result[j];
-                    count = 1;
-                }
+        if (n == 1)
+            return "1";
+        string str = countAndSay( n - 1);
+        int freq = 1;
+        string res = "";
+        char ch = str[0];
+        for (int i = 1; i < str.size(); i++) {
+           char  dh = str[i];
+            if (ch == dh) {
+                freq++;
+            } else {
+                res += (to_string(freq) + ch);
+                freq = 1;
+                ch = dh;
             }
-
-            result = current;
         }
-
-        return result;
+        res += (to_string(freq) + ch);
+        return res;
     }
 };
